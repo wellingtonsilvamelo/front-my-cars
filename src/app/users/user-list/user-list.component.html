@@ -1,0 +1,65 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <h1>Users</h1>
+            <button type="button" routerLink="/user/register" class="btn btn-dark">Add User</button>
+        </div>
+    </div>
+  </div>
+  
+  <!-- <div class="container">
+    <div class="card bg-light border-0" style="margin-bottom: 15px;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-white border-0 pr-1" id="basic-addon1"><i class=""></i></span>
+              </div>
+              <input type="text" class="form-control border-0 fs-custom" placeholder="Search your task here!"
+                aria-label="Search your task here!" aria-describedby="button-addon2">
+              <div class="input-group-append" tooltip="Click here to add a new task.">
+                <button class="btn btn-secondary border-0" type="button" id="button-addon2" (click)="taskModalForm.show()"><i
+                    class="fas"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <div class="container">
+    <!-- <div class="my-spinner"></div> -->
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item list-group-item-action" *ngFor="let user of returnedArray">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1 flex-grow-1" style="cursor: pointer;" [routerLink]="['/user/detail', user.id]">{{user.firstName}} {{user.lastName}}</h5>
+          <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="showDeleteModal(user.id)"><i class="fas" [ngClass]="{'fa-trash-alt': isLoadingResults == false, 'fa-sync faa-spin animated': isLoadingResults}"></i></button>
+        <button type="button" class="btn btn-info btn-sm" ><i class="fas" [ngClass]="{'fa-edit': isLoadingResults == false, 'fa-sync faa-spin animated': isLoadingResults}"></i></button>
+        </div>
+        <p class="mb-1">{{user.email}}</p>
+        <small><strong>Created at</strong> {{user.createdAt | date:"dd/MM/yyy"}}</small>
+      </li>
+    </ul>
+  </div>
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-12">
+        <div class="d-flex w-100 flex-row-reverse" >
+            <div class="container" *ngIf="contentArray.length > itemsPerPage">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="d-flex w-100 flex-row-reverse" [ngClass]="{'disabledDiv': isLoadingResults}">
+                      <pagination [(ngModel)]="currentPage" [itemsPerPage]="itemsPerPage" [boundaryLinks]="true" [totalItems]="contentArray.length" [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;"
+                        firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)">
+                      </pagination>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
