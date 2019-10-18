@@ -13,7 +13,10 @@
 <div class="container">
     <ul class="list-group list-group-flush mb-3">
         <li class="list-group-item list-group-item-action" *ngFor="let car of returnedArray">
-            <div class="d-flex w-100 justify-content-between">
+            <div class="d-flex w-100 justify-content-between" 
+            tooltip="Clique no modelo para detalhar o veículo."
+            [adaptivePosition]="true"
+            placement="top">
                 <h5 class="mb-1 flex-grow-1" style="cursor: pointer;" [routerLink]="['/car/detail', car.id]">
                     {{car.model}} / {{car.year}} / {{car.color}}</h5>
                 <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="showDeleteModal(car.id)"

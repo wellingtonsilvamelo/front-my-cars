@@ -13,7 +13,11 @@
   <div class="container">
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-action" *ngFor="let user of returnedArray">
-        <div class="d-flex w-100 justify-content-between">
+        <div class="d-flex w-100 justify-content-between"
+        tooltip="Clique no nome para detalhar o usuário."
+            [adaptivePosition]="true"
+            placement="top"  
+        >
           <h5 class="mb-1 flex-grow-1" style="cursor: pointer;" [routerLink]="['/user/detail', user.id]">{{user.firstName}} {{user.lastName}}</h5>
           <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="showDeleteModal(user.id)"
             tooltip="Remove an user."
