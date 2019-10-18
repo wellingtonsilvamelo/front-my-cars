@@ -6,10 +6,10 @@
                     <section class="mb-4 pb-1">
                         <div class="work-experience">
                             <div class="work mb-4">
-                                <strong class="h5 d-block text-secondary font-weight-bold mb-1">{{user.firstName}} {{user.lastName}}</strong>
+                                <strong class="h5 d-block text-secondary font-weight-bold mb-1">{{ user.firstName }} {{ user.lastName }}</strong>
                                 <strong class="h6 d-block text-warning mb-1">{{user.email}}</strong>
                                 <strong class="h6 d-block text-warning mb-1">Phone: {{user.phone}}</strong>
-                                <strong class="h6 d-block text-warning mb-1">Birthday: {{user.birthday | date:"dd/MM/yyy"}}</strong>
+                                <strong class="h6 d-block text-warning mb-1">Birthday: {{user.birthday | date:"dd/MM/yyyy"}}</strong>
                             </div>
                         </div>    
                     </section>                    
@@ -25,8 +25,8 @@
                     Full-Stack Programmer
                 </p>
                 <p class="lead mt-4">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p> -->
-                <section class="mt-3 item-of-car" *ngFor="let car of user.cars">
-                    <div class="row">
+                <section class="mt-3 item-of-car">
+                    <div class="row" *ngFor="let car of cars">
                         <div class="col-md-6">
                             <h3 class="h6 font-weight-light text-secondary text-uppercase">Amount of use</h3>
                             <div class="d-flex align-items-center">

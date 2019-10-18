@@ -1,1 +1,45 @@
-<p>car-detail works!</p>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-md-3 pr-md-5">
+            <img class="w-100 rounded border" src="http://jfluxury.com/wp-content/uploads/2018/06/jf_luxury_22_6_2018_13_45_5_5.jpg" />
+        </div>
+        <div class="col-md-9">
+            <div class="d-flex align-items-center">
+                <h2 class="font-weight-bold m-0">
+                    Owner: {{ user.firstName }} {{ user.lastName }}
+                </h2>
+            </div>
+            <section class="mt-4 item-of-car">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3 class="h6 font-weight-light text-secondary text-uppercase">Used</h3>
+                        <div class="d-flex align-items-center">
+                            <strong class="h3 font-weight-bold m-0 mr-3">{{car.amountUse}}</strong>
+                            <div>
+                                <input data-filled="fa fa-2x fa-star mr-1 text-warning" data-empty="fa fa-2x fa-star-o mr-1 text-light" value="5" type="hidden" class="rating" data-readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="h6 font-weight-light text-secondary text-uppercase">Color</h3>
+                        <div class="d-flex align-items-center">
+                            <strong class="h3 font-weight-bold m-0 mr-3">{{car.color}}</strong>
+                            <div>
+                                <input data-filled="fa fa-2x fa-star mr-1 text-warning" data-empty="fa fa-2x fa-star-o mr-1 text-light" value="5" type="hidden" class="rating" data-readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="h6 font-weight-light text-secondary text-uppercase">{{car.model}}</h3>
+                        <div class="d-flex align-items-center">
+                            <strong class="h3 font-weight-bold m-0 mr-3">{{car.licensePlate}}</strong>
+                            <div>
+                                <input data-filled="fa fa-2x fa-star mr-1 text-warning" data-empty="fa fa-2x fa-star-o mr-1 text-light" value="5" type="hidden" class="rating" data-readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  // AUTH_SERVER: string = "https://app-my-cars.herokuapp.com";
+  //AUTH_SERVER: string = "https://app-my-cars.herokuapp.com";
   AUTH_SERVER: string = "http://localhost:8085";
   authSubject = new BehaviorSubject(false);
-  showMenuEmitter = new EventEmitter<boolean>();  
+  showMenuEmitter = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -41,33 +41,45 @@ export class AuthService {
       { headers: this.getHeader() }).pipe(
         tap(async (res: JwtResponse) => {
           if (res.access_token) {
-            localStorage.removeItem("ACCESS_TOKEN");
-            localStorage.removeItem("EXPIRES_IN");
+            localStorage.clear();
 
             localStorage.setItem("ACCESS_TOKEN", res.access_token);
             localStorage.setItem("EXPIRES_IN", res.expires_in);
-            
+
             this.showMenuEmitter.emit(true);
             this.authSubject.next(true);
-          }else{
+          } else {
             this.showMenuEmitter.emit(false);
           }
         })
       );
   }
 
+  private validateToken(token: string): Observable<boolean> {
+    const options = {
+      'headers': new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    }
+    return this.http.get<boolean>(`${this.AUTH_SERVER}/api/validateToken`, options);
+  }
+
   signOut() {
-    localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("EXPIRES_IN");
+    localStorage.clear();
     this.showMenuEmitter.emit(false);
     this.authSubject.next(false);
   }
 
   isAuthenticated() {
-    if(localStorage.getItem("ACCESS_TOKEN")){
-      return true;
-    }
-    return false;
+    return new Promise(async (resolve, reject) => {
+      if (localStorage.getItem("ACCESS_TOKEN")) {
+        await this.validateToken(localStorage.getItem("ACCESS_TOKEN")).subscribe((res: boolean) => {
+          res ? resolve(true) : reject(false);
+        });
+      }else{
+        reject(false);
+      }
+    });
   }
 
   getHeader() {
@@ -76,5 +88,12 @@ export class AuthService {
       'Authorization': 'Basic dG9td2VsbEFwcDowNm9HZyNLRmFCcjE0VE43QGVaTEJ5U3N0JEt1VUR4bQ=='
     });
   }
-  
+
+  getAuthoriHeader() {
+    return new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic dG9td2VsbEFwcDowNm9HZyNLRmFCcjE0VE43QGVaTEJ5U3N0JEt1VUR4bQ=='
+    });
+  }
+
 }

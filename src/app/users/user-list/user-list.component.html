@@ -19,7 +19,7 @@
             tooltip="Remove an user."
             [adaptivePosition]="true"
             placement="top"><i class="fas" [ngClass]="{'fa-trash-alt': isLoadingResults == false, 'fa-sync faa-spin animated': isLoadingResults}"></i></button>
-        <button type="button" class="btn btn-info btn-sm" 
+        <button type="button" class="btn btn-info btn-sm" [routerLink]="['/user/edit/', user.id]"
             tooltip="Edit a user."
             [adaptivePosition]="true"
             placement="top"><i class="fas" [ngClass]="{'fa-edit': isLoadingResults == false, 'fa-sync faa-spin animated': isLoadingResults}"></i></button>

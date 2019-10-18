@@ -33,7 +33,6 @@ export class CarListComponent implements OnInit {
     this.isLoadingResults = true;
     this._api.getCars()
       .subscribe(res => {
-        console.log(res);
         this.contentArray = res;
         this.isLoadingResults = false;
         this.returnedArray = this.contentArray.slice(this.currentPage - 1, this.itemsPerPage);

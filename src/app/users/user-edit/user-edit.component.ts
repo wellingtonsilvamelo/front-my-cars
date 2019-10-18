@@ -39,10 +39,7 @@ export class UserEditComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
       birthday: [null, [Validators.required]],
       phone: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(11), FormValidations.phoneValidator]],
-      email: [null, [Validators.required, Validators.email, Validators.maxLength(50)]],
-      login: [null, [Validators.required, Validators.minLength(8)]],
-      password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(14)]],
-      doubleCheckPassword: [null, [FormValidations.equalTo('password')]]
+      email: [null, [Validators.required, Validators.email, Validators.maxLength(50)]]
     }); 
   }
 
@@ -87,7 +84,6 @@ export class UserEditComponent implements OnInit {
     this.isLoadingResults = true;
     this.api.getUser(id)
       .subscribe(res => {
-        console.log(res);
         this.user = res;
         this.popularFormulario(this.user);
         this.isLoadingResults = false;
@@ -103,9 +99,9 @@ export class UserEditComponent implements OnInit {
     this.isLoadingResults = true;
     this.api.updateUser(this.user, id)
       .subscribe(res => {
-        this.user = res;
         this.toastr.success("User Updated successfully");
         this.isLoadingResults = false;
+        this.goToUsers();
       }, err => {
         this.toastr.error(Util.getErrorMessage(err), null, {
           enableHtml: true
@@ -114,8 +110,11 @@ export class UserEditComponent implements OnInit {
       });
   }
   
+  goToUsers(){
+    this.router.parseUrl("/users");
+  }
+
   popularFormulario(data){
-    console.log(data);
     this.formulario.patchValue({
       id: data.id,
       firstName: data.firstName,

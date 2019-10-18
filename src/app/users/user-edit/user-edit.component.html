@@ -1,91 +1,61 @@
 <div class="jumbotron">
-        <div class="container">
-            <h1 class="text-center">Register User</h1>
-        </div>
-    </div>
-    
     <div class="container">
-        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-            <div class="d-flex justify-content-center">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="inputFirstName4">First Name</label>
-                        <input type="text" class="form-control" [ngClass]="applyCssErr('firstName')" formControlName="firstName"
-                            id="inputFirstName4" placeholder="First Name">
-                        <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('firstName')" [label]="'First Name'"></app-error-message> -->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputLastName4">Last Name</label>
-                        <input type="text" class="form-control" [ngClass]="applyCssErr('lastName')" formControlName="lastName"
-                            id="inputLastName4" placeholder="Last Name">
-                        <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('lastName')" [label]="'Last Name'"></app-error-message> -->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputBirthday">Birthday</label>
-                        <input type="text"
-                            id="inputBirthday" 
-                            placeholder="Datepicker" 
-                            class="form-control" 
-                            bsDatepicker
-                            [ngClass]="applyCssErr('birthday')"
-                            formControlName="birthday"
-                            [bsConfig]="{ adaptivePosition: true }">
-                        <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('birthday')" [label]="'Birthday'"></app-error-message> -->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPhone">Phone</label>
-                        <input type="text" class="form-control" [ngClass]="applyCssErr('phone')" formControlName="phone"
-                            id="inputPhone" placeholder="Phone">
-                        <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('phone')" [label]="'Phone'"></app-error-message> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                            <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" [ngClass]="applyCssErr('email')" formControlName="email"
-                                id="inputEmail" placeholder="Email">
-                            <div class="invalid-feedback">
-                                <!-- <app-error-message [control]="formulario.get('email')" [label]="'Email'"></app-error-message> -->
-                            </div>
-                        </div>
-                    <div class="form-group">
-                        <label for="inputLogin">Login</label>
-                        <input type="text" class="form-control" [ngClass]="applyCssErr('login')"
-                            formControlName="login" id="inputLogin" placeholder="Login">
-                        <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('logn')" [label]="'Login'"></app-error-message> -->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSenha">Password</label>
-                        <input type="password" class="form-control" [ngClass]="applyCssErr('password')" formControlName="password"
-                            id="inputSenha" placeholder="Password">
-                        <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('password')" [label]="'Password'"></app-error-message> -->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputdoubleCheckPassword">Confirm the password</label>
-                        <input type="password" class="form-control" [ngClass]="applyCssErr('doubleCheckPassword')"
-                            formControlName="doubleCheckPassword" id="inputdoubleCheckPassword" placeholder="Confirm your password">
-                        <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('doubleCheckPassword')" [label]="'Confirm password'"> -->
-                            <!-- </app-error-message> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary btn-block">Save</button></div>
-            </div>
-        </form>
+        <h1 class="text-center">Edit a User</h1>
     </div>
+</div>
+
+<div class="container">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputFirstName4">First Name</label>
+                    <input type="text" class="form-control" [ngClass]="applyCssErr('firstName')"
+                        formControlName="firstName" id="inputFirstName4" placeholder="First Name">
+                    <div class="invalid-feedback">
+                        <!-- <app-error-message [control]="formulario.get('firstName')" [label]="'First Name'"></app-error-message> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputLastName4">Last Name</label>
+                    <input type="text" class="form-control" [ngClass]="applyCssErr('lastName')"
+                        formControlName="lastName" id="inputLastName4" placeholder="Last Name">
+                    <div class="invalid-feedback">
+                        <!-- <app-error-message [control]="formulario.get('lastName')" [label]="'Last Name'"></app-error-message> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBirthday">Birthday</label>
+                    <input type="text" id="inputBirthday" placeholder="Datepicker" class="form-control" bsDatepicker
+                        [ngClass]="applyCssErr('birthday')" formControlName="birthday"
+                        [bsConfig]="{ adaptivePosition: true }">
+                    <div class="invalid-feedback">
+                        <!-- <app-error-message [control]="formulario.get('birthday')" [label]="'Birthday'"></app-error-message> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputPhone">Phone</label>
+                    <input type="text" class="form-control" [ngClass]="applyCssErr('phone')" formControlName="phone"
+                        id="inputPhone" placeholder="Phone">
+                    <div class="invalid-feedback">
+                        <!-- <app-error-message [control]="formulario.get('phone')" [label]="'Phone'"></app-error-message> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" [ngClass]="applyCssErr('email')" formControlName="email"
+                        id="inputEmail" placeholder="Email">
+                    <div class="invalid-feedback">
+                        <!-- <app-error-message [control]="formulario.get('email')" [label]="'Email'"></app-error-message> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary btn-block">Save</button></div>
+        </div>
+    </form>
+</div>

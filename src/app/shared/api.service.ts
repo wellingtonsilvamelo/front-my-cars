@@ -9,16 +9,11 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const httpOptionsAuthenticated = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
-  })
-};
+
 const httpPostParamOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
 };
-// const apiUrl = 'https://app-my-cars.herokuapp.com/api';
+//const apiUrl = 'https://app-my-cars.herokuapp.com/api';
 const apiUrl = 'http://localhost:8085/api';
 
 @Injectable({
@@ -61,24 +56,24 @@ export class ApiService {
   /*********************************   CAR  *************************************/
 
   getCars (): Observable<any> {
-    return this.http.get<any>(`${apiUrl}/cars/`, httpOptionsAuthenticated)
+    return this.http.get<any>(`${apiUrl}/cars/`, this.getAuthorizedHeader())
       .pipe(catchError(this.handleError('getCars', [])));
   }
 
   getCar(id: number): Observable<any> {
     const url = `${apiUrl}/cars/${id}`;
-    return this.http.get<any>(url, httpOptionsAuthenticated).pipe(catchError(this.handleError<User>(`getCar id=${id}`)));
+    return this.http.get<any>(url, this.getAuthorizedHeader()).pipe(catchError(this.handleError<User>(`getCar id=${id}`)));
   }
 
   saveCar (car: Car): Observable<any> {
-    return this.http.post<User>(`${apiUrl}/cars/`, car, httpOptionsAuthenticated)
+    return this.http.post<User>(`${apiUrl}/cars/`, car, this.getAuthorizedHeader())
       .pipe(
         catchError(this.handleError('save a car', []))
       );
   }
 
   updateCar (car: Car, id: number): Observable<any> {
-    return this.http.put<User>(`${apiUrl}/users/${id}`, car, httpOptionsAuthenticated)
+    return this.http.put<Car>(`${apiUrl}/cars/${id}`, car, this.getAuthorizedHeader())
       .pipe(
         catchError(this.handleError('update an user', []))
       );
@@ -86,8 +81,17 @@ export class ApiService {
 
   deleteCar (id: number): Observable<any> {
     const url = `${apiUrl}/cars/${id}`;
-    return this.http.delete<any>(url, httpOptionsAuthenticated).pipe(
+    return this.http.delete<any>(url, this.getAuthorizedHeader()).pipe(
       catchError(this.handleError<User>('deleteCar')));
+  }
+
+  getAuthorizedHeader(){
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
+      })
+    };
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

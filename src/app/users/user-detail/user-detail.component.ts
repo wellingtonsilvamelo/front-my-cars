@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/shared/api.service';
 import { Util } from 'src/app/util/util';
+import { Car } from 'src/app/model/car';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,6 +16,7 @@ export class UserDetailComponent implements OnInit {
 
   formulario: FormGroup;
   user: User;
+  cars: Car[];
   isLoadingResults = false;
 
   constructor(
@@ -27,6 +29,7 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = new User();
     this.getUser();
   }
 
@@ -34,8 +37,8 @@ export class UserDetailComponent implements OnInit {
     this.isLoadingResults = true;
     this.api.getUser(this.activatedRoute.snapshot.params.id)
       .subscribe(res => {
-        console.log(res);
         this.user = res;
+        this.cars = this.user.cars;
         this.isLoadingResults = false;
       }, err => {
         this.toastr.error(Util.getErrorMessage(err), null, {

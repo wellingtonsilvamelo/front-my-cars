@@ -25,6 +25,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { CarRegisterComponent } from './cars/car-register/car-register.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CarEditComponent } from './cars/car-edit/car-edit.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ConfirmationModalComponent,
     UserEditComponent,
     ErrorMessageComponent,
-    CarRegisterComponent
+    CarRegisterComponent,
+    CarEditComponent
   ],
   imports: [
     BrowserModule,

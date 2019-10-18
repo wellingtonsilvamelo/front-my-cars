@@ -1,0 +1,54 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">Edit a Car</h1>
+    </div>
+</div>
+
+<div class="container">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputPlate">License Plate</label>
+                    <input type="text" class="form-control" [ngClass]="applyCssErr('licensePlate')"
+                        formControlName="licensePlate" id="inputPlate" placeholder="Plate">
+                    <div class="invalid-feedback">
+                        <app-error-message [control]="formulario.get('licensePlate')" [label]="'licensePlate'">
+                        </app-error-message>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputYear">Year</label>
+                    <input type="number" class="form-control" [ngClass]="applyCssErr('year')" formControlName="year"
+                        id="inputYear" placeholder="Year">
+                    <div class="invalid-feedback">
+                        <app-error-message [control]="formulario.get('year')" [label]="'Year'"></app-error-message>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="inputModel">Model</label>
+                    <input type="text" class="form-control" [ngClass]="applyCssErr('model')" formControlName="model"
+                        id="inputModel" placeholder="Model">
+                    <div class="invalid-feedback">
+                        <app-error-message [control]="formulario.get('model')" [label]="'Model'"></app-error-message>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputColor">Color</label>
+                    <input type="text" class="form-control" [ngClass]="applyCssErr('color')" formControlName="color"
+                        id="inputColor" placeholder="Color">
+                    <div class="invalid-feedback">
+                        <app-error-message [control]="formulario.get('color')" [label]="'Color'">
+                        </app-error-message>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary btn-block">Save</button></div>
+        </div>
+    </form>
+</div>

@@ -8,6 +8,9 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { CarListComponent } from './cars/car-list/car-list.component';
 import { CarRegisterComponent } from './cars/car-register/car-register.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { CarDetailComponent } from './cars/car-detail/car-detail.component';
+import { CarEditComponent } from './cars/car-edit/car-edit.component';
 
 const routes: Routes = [
   {
@@ -15,16 +18,17 @@ const routes: Routes = [
     component: HomeComponent,
     data: { title: 'Home' },
     canActivate: [RouteGuard]
-  },
+  },  
   {
-    path: 'users',
-    component: UserListComponent,
-    data: { title: 'Users' }
+    path: 'login',
+    component: LoginComponent,
+    data: { title: 'Sign In' }
   },
   {
     path: 'cars',
     component: CarListComponent,
-    data: { title: 'Cars' }
+    data: { title: 'Cars' },
+    canActivate: [RouteGuard]
   },
   {
     path: 'car/register',
@@ -33,9 +37,21 @@ const routes: Routes = [
     canActivate: [RouteGuard]
   },
   {
-    path: 'login',
-    component: LoginComponent,
-    data: { title: 'Sign In' }
+    path: 'car/detail/:id',
+    component: CarDetailComponent,
+    data: { title: 'Detail' },
+    canActivate: [RouteGuard]
+  },
+  {
+    path: 'car/edit/:id',
+    component: CarEditComponent,
+    data: { title: 'Edit' },
+    canActivate: [RouteGuard]
+  },
+  {
+    path: 'users',
+    component: UserListComponent,
+    data: { title: 'Users' }
   },
   {
     path: 'user/register',
@@ -43,9 +59,9 @@ const routes: Routes = [
     data: { title: 'Sign Up' }
   },
   {
-    path: 'user/register/:id',
-    component: RegisterComponent,
-    data: { title: 'Sign On' }
+    path: 'user/edit/:id',
+    component: UserEditComponent,
+    data: { title: 'Edit' }
   },
   {
     path: 'user/detail/:id',

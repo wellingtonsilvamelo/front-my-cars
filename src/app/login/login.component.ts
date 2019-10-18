@@ -44,13 +44,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+
+    this.authService.signOut();
+
     if (this.formulario.valid){
       this.user = new User();
       this.user.login = this.formulario.get('username').value;
       this.user.password = this.formulario.get('senha').value;
 
       this.authService.singIn(this.user).subscribe((res)=>{
-        console.log("Logged in!");
         this.router.navigateByUrl('users');
       }, err => {
         this.toastr.error(Util.getErrorMessage(err), null, {
