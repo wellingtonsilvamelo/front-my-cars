@@ -12,7 +12,8 @@ export class FormValidations {
             'emailInvalid': `${fieldName} já existe!`,
             'email': `Por favor, informe um ${fieldName} válido!`,
             'notEqualTo': `${fieldName} não correspondem!`,
-            'requiredCheckMin': `Você precisa informar ao menos ${validatorValue.requiredLength} ${fieldName}!`
+            'requiredCheckMin': `Você precisa informar ao menos ${validatorValue.requiredLength} ${fieldName}!`,
+            'invalidPlate': `Informe uma placa válida!`
         }
         return config[validatorName];
     }
@@ -41,6 +42,15 @@ export class FormValidations {
         if (phone && phone !== '') {
             const validatePhone = /^[0-9]{10,11}$/;
             return validatePhone.test(phone) ? null : { invalidPhone: true }
+        }
+        return null;
+    }
+
+    static plateValidator(formControl: FormControl) {
+        const plate = formControl.value;
+        if (plate && plate !== '') {
+            const validatePlate = /^[a-zA-Z]{3}[0-9]{4}$/;
+            return validatePlate.test(plate) ? null : { invalidPlate: true }
         }
         return null;
     }

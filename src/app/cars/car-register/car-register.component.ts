@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-//import { FormValidations } from '../shared/form-validations';
-//import { AuthService } from '../auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../model/user';
-import { FormValidations } from '../util/form-validations';
-import { ApiService } from '../shared/api.service';
-import { Util } from '../util/util';
-import { Car } from '../model/car';
+import { Util } from 'src/app/util/util';
+import { Car } from 'src/app/model/car';
+import { FormValidations } from 'src/app/util/form-validations';
+import { ApiService } from 'src/app/shared/api.service';
+import { User } from 'src/app/model/user';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-car-register',
+  templateUrl: './car-register.component.html',
+  styleUrls: ['./car-register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class CarRegisterComponent implements OnInit {
 
   formulario: FormGroup;
-  user: User;
+  users: User[];
   car: Car;
   isLoadingResults: Boolean = false;
   isUpdate: Boolean = false;
@@ -33,16 +31,13 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getAllUsers();
+
     this.formulario = this.formBuilder.group({
-      firstName: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      lastName: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-      birthday: [null, [Validators.required]],
-      phone: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(11), FormValidations.phoneValidator]],
-      email: [null, [Validators.required, Validators.email, Validators.maxLength(50)]],
-      login: [null, [Validators.required, Validators.minLength(8)]],
-      password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(14)]],
-      doubleCheckPassword: [null, [Validators.required, FormValidations.equalTo('password')]],
-      licensePlate: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), FormValidations.plateValidator]],
+      licensePlate: [null, [Validators.required, Validators.minLength(7), 
+                            Validators.maxLength(10), 
+                            FormValidations.plateValidator]],
+      user: [null, [Validators.required, Validators.min(1)]],
       year: [null, [Validators.required, Validators.min(1990)]],
       model: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       color: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
@@ -75,36 +70,39 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
     if (this.formulario.valid){
-      //TODO - Construir factory
-      this.user = new User();
-      this.user.firstName = this.formulario.get('firstName').value;
-      this.user.lastName = this.formulario.get('lastName').value;
-      this.user.email = this.formulario.get('email').value;
-      this.user.birthday = this.formulario.get('birthday').value;
-      this.user.login = this.formulario.get('login').value;
-      this.user.password = this.formulario.get('password').value;
-      this.user.phone = this.formulario.get('phone').value;
-      this.user.cars = new Array<Car>();
       this.car = new Car();
       this.car.licensePlate = this.formulario.get('licensePlate').value;
       this.car.model = this.formulario.get('model').value;
       this.car.year = this.formulario.get('year').value;
       this.car.color = this.formulario.get('color').value;
       this.car.amountUse = 0;
-      this.user.cars.push(this.car);
+      this.car.userId = this.formulario.get('user').value;
 
-      this.saveUser();
+      this.saveCar();
     }else{
       this.verificarValidacaoForm(this.formulario);
     }
   }
 
-  saveUser() {
+  getAllUsers() {
     this.isLoadingResults = true;
-    this.api.saveUser(this.user)
+    this.api.getUsers()
       .subscribe(res => {
-        this.user = res;
-        this.toastr.success("User saved successfully");
+        this.users = res;
+      }, err => {
+        this.toastr.error(Util.getErrorMessage(err), null, {
+          enableHtml: true
+        });
+        this.isLoadingResults = false;
+      });
+  }
+
+  saveCar() {
+    this.isLoadingResults = true;
+    this.api.saveCar(this.car)
+      .subscribe(res => {
+        this.car = res;
+        this.toastr.success("Car saved successfully");
         this.formulario.reset();
         this.isLoadingResults = false;
       }, err => {
@@ -114,4 +112,5 @@ export class RegisterComponent implements OnInit {
         this.isLoadingResults = false;
       });
   }
+
 }

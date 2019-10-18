@@ -13,7 +13,7 @@
                     <input type="text" class="form-control" [ngClass]="applyCssErr('firstName')" formControlName="firstName"
                         id="inputFirstName4" placeholder="First Name">
                     <div class="invalid-feedback">
-                        <!-- <app-error-message [control]="formulario.get('firstName')" [label]="'First Name'"></app-error-message> -->
+                        <app-error-message [control]="formulario.get('firstName')" [label]="'First Name'"></app-error-message>
                     </div>
                 </div>
                 <div class="form-group">
@@ -21,7 +21,7 @@
                     <input type="text" class="form-control" [ngClass]="applyCssErr('lastName')" formControlName="lastName"
                         id="inputLastName4" placeholder="Last Name">
                     <div class="invalid-feedback">
-                        <!-- <app-error-message [control]="formulario.get('lastName')" [label]="'Last Name'"></app-error-message> -->
+                        <app-error-message [control]="formulario.get('lastName')" [label]="'Last Name'"></app-error-message>
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,7 +35,7 @@
                         formControlName="birthday"
                         [bsConfig]="{ adaptivePosition: true }">
                     <div class="invalid-feedback">
-                        <!-- <app-error-message [control]="formulario.get('birthday')" [label]="'Birthday'"></app-error-message> -->
+                        <app-error-message [control]="formulario.get('birthday')" [label]="'Birthday'"></app-error-message>
                     </div>
                 </div>
                 <div class="form-group">
@@ -43,7 +43,7 @@
                     <input type="text" class="form-control" [ngClass]="applyCssErr('phone')" formControlName="phone"
                         id="inputPhone" placeholder="Phone">
                     <div class="invalid-feedback">
-                        <!-- <app-error-message [control]="formulario.get('phone')" [label]="'Phone'"></app-error-message> -->
+                        <app-error-message [control]="formulario.get('phone')" [label]="'Phone'"></app-error-message>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <input type="email" class="form-control" [ngClass]="applyCssErr('email')" formControlName="email"
                             id="inputEmail" placeholder="Email">
                         <div class="invalid-feedback">
-                            <!-- <app-error-message [control]="formulario.get('email')" [label]="'Email'"></app-error-message> -->
+                            <app-error-message [control]="formulario.get('email')" [label]="'Email'"></app-error-message>
                         </div>
                     </div>
                 <div class="form-group">
@@ -61,7 +61,7 @@
                     <input type="text" class="form-control" [ngClass]="applyCssErr('login')"
                         formControlName="login" id="inputLogin" placeholder="Login">
                     <div class="invalid-feedback">
-                        <!-- <app-error-message [control]="formulario.get('logn')" [label]="'Login'"></app-error-message> -->
+                        <app-error-message [control]="formulario.get('login')" [label]="'Login'"></app-error-message>
                     </div>
                 </div>
                 <div class="form-group">
@@ -69,7 +69,7 @@
                     <input type="password" class="form-control" [ngClass]="applyCssErr('password')" formControlName="password"
                         id="inputSenha" placeholder="Password">
                     <div class="invalid-feedback">
-                        <!-- <app-error-message [control]="formulario.get('password')" [label]="'Password'"></app-error-message> -->
+                        <app-error-message [control]="formulario.get('password')" [label]="'Password'"></app-error-message>
                     </div>
                 </div>
                 <div class="form-group">
@@ -77,11 +77,46 @@
                     <input type="password" class="form-control" [ngClass]="applyCssErr('doubleCheckPassword')"
                         formControlName="doubleCheckPassword" id="inputdoubleCheckPassword" placeholder="Confirm your password">
                     <div class="invalid-feedback">
-                        <!-- <app-error-message [control]="formulario.get('doubleCheckPassword')" [label]="'Confirm password'"> -->
-                        <!-- </app-error-message> -->
+                        <app-error-message [control]="formulario.get('doubleCheckPassword')" [label]="'Double check'">
+                        </app-error-message>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                    <div class="form-group">
+                            <label for="inputPlate">License Plate</label>
+                            <input type="text" class="form-control" [ngClass]="applyCssErr('licensePlate')" formControlName="licensePlate"
+                                id="inputPlate" placeholder="Plate">
+                            <div class="invalid-feedback">
+                                <app-error-message [control]="formulario.get('licensePlate')" [label]="'licensePlate'"></app-error-message>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label for="inputYear">Year</label>
+                        <input type="number" class="form-control" [ngClass]="applyCssErr('year')"
+                            formControlName="year" id="inputYear" placeholder="Year">
+                        <div class="invalid-feedback">
+                            <app-error-message [control]="formulario.get('year')" [label]="'Year'"></app-error-message>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputModel">Model</label>
+                        <input type="text" class="form-control" [ngClass]="applyCssErr('model')" formControlName="model"
+                            id="inputModel" placeholder="Model">
+                        <div class="invalid-feedback">
+                            <app-error-message [control]="formulario.get('model')" [label]="'Model'"></app-error-message>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputColor">Color</label>
+                        <input type="text" class="form-control" [ngClass]="applyCssErr('color')"
+                            formControlName="color" id="inputColor" placeholder="Color">
+                        <div class="invalid-feedback">
+                            <app-error-message [control]="formulario.get('color')" [label]="'Color'">
+                            </app-error-message>
+                        </div>
+                    </div>
+                </div>
         </div>
         <div class="d-flex justify-content-center">
             <div class="col-md-4">

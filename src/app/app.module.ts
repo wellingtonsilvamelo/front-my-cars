@@ -21,6 +21,10 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ErrorMessageComponent } from './error-message/error-message.component';
+import { CarRegisterComponent } from './cars/car-register/car-register.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     CarListComponent,
     CarDetailComponent,
     ConfirmationModalComponent,
-    UserEditComponent
+    UserEditComponent,
+    ErrorMessageComponent,
+    CarRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,9 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

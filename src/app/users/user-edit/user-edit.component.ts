@@ -104,7 +104,7 @@ export class UserEditComponent implements OnInit {
     this.api.updateUser(this.user, id)
       .subscribe(res => {
         this.user = res;
-        this.toastr.success("Updated User successfully");
+        this.toastr.success("User Updated successfully");
         this.isLoadingResults = false;
       }, err => {
         this.toastr.error(Util.getErrorMessage(err), null, {

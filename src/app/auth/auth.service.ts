@@ -41,8 +41,12 @@ export class AuthService {
       { headers: this.getHeader() }).pipe(
         tap(async (res: JwtResponse) => {
           if (res.access_token) {
+            localStorage.removeItem("ACCESS_TOKEN");
+            localStorage.removeItem("EXPIRES_IN");
+
             localStorage.setItem("ACCESS_TOKEN", res.access_token);
             localStorage.setItem("EXPIRES_IN", res.expires_in);
+            
             this.showMenuEmitter.emit(true);
             this.authSubject.next(true);
           }else{

@@ -7,6 +7,7 @@ import { RouteGuard } from './auth/route.guard';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { CarListComponent } from './cars/car-list/car-list.component';
+import { CarRegisterComponent } from './cars/car-register/car-register.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,12 @@ const routes: Routes = [
   {
     path: 'cars',
     component: CarListComponent,
-    data: { title: 'Cars' },
+    data: { title: 'Cars' }
+  },
+  {
+    path: 'car/register',
+    component: CarRegisterComponent,
+    data: { title: 'Cars Register' },
     canActivate: [RouteGuard]
   },
   {
