@@ -5,6 +5,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user';
 import { JwtResponse } from '../model/jwt-response';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
   authSubject = new BehaviorSubject(false);
   showMenuEmitter = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
   register(user: User): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(`${this.AUTH_SERVER}/api/v1/user/register`, user).pipe(
@@ -46,6 +47,13 @@ export class AuthService {
             localStorage.setItem("ACCESS_TOKEN", res.access_token);
             localStorage.setItem("EXPIRES_IN", res.expires_in);
 
+            this.me(res.access_token)
+              .subscribe(res => {
+                localStorage.setItem("LOGGED_USER", JSON.stringify(res))
+              }, err => {
+                this.toastr.error("There's something wrong with this user.");
+              });
+
             this.showMenuEmitter.emit(true);
             this.authSubject.next(true);
           } else {
@@ -53,6 +61,16 @@ export class AuthService {
           }
         })
       );
+  }
+
+  me(token: String): Observable<any> {
+    let options = {
+      'headers': new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    }
+    const url = `${this.AUTH_SERVER}/api/me`;
+    return this.http.get<any>(`${this.AUTH_SERVER}/api/me`, options);
   }
 
   private validateToken(token: string): Observable<boolean> {

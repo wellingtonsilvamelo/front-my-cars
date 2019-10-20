@@ -101,17 +101,13 @@ export class UserEditComponent implements OnInit {
       .subscribe(res => {
         this.toastr.success("User Updated successfully");
         this.isLoadingResults = false;
-        this.goToUsers();
+        this.router.navigateByUrl("/users");
       }, err => {
         this.toastr.error(Util.getErrorMessage(err), null, {
           enableHtml: true
         });
         this.isLoadingResults = false;
       });
-  }
-  
-  goToUsers(){
-    this.router.parseUrl("/users");
   }
 
   popularFormulario(data){

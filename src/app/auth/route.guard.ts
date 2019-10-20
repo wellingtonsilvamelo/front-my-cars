@@ -21,7 +21,7 @@ export class RouteGuard implements CanActivate {
         },
         err => {
           this.authService.signOut();
-          return this.router.parseUrl("/login");
+          return this.router.navigateByUrl("/login");
         }
       )
     });

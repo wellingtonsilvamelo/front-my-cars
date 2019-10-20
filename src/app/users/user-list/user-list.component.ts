@@ -48,6 +48,17 @@ export class UserListComponent implements OnInit {
 
   delete(userId: number) {
     this.isLoadingResults = true;
+
+    if(localStorage.getItem("LOGGED_USER")){
+      let loggedUser: User = JSON.parse(localStorage.getItem("LOGGED_USER"));
+
+      if(loggedUser.id === userId){
+        this.toastr.error("You cant delete yourself!");
+        this.isLoadingResults = false;
+        return;
+      }
+    }
+
     this._api.deleteUser(userId)
       .subscribe(res => {
         this.toastr.success("User removed successfully");

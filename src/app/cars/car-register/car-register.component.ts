@@ -105,6 +105,7 @@ export class CarRegisterComponent implements OnInit {
         this.toastr.success("Car saved successfully");
         this.formulario.reset();
         this.isLoadingResults = false;
+        this.router.navigateByUrl("/cars");
       }, err => {
         this.toastr.error(Util.getErrorMessage(err), null, {
           enableHtml: true
