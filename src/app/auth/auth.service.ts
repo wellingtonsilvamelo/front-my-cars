@@ -13,8 +13,8 @@ import { Util } from '../util/util';
 })
 export class AuthService {
 
-  //AUTH_SERVER: string = "https://app-my-cars.herokuapp.com";
-  AUTH_SERVER: string = "http://localhost:8085";
+  AUTH_SERVER: string = "https://app-my-cars.herokuapp.com";
+  //AUTH_SERVER: string = "http://localhost:8085";
   authSubject = new BehaviorSubject(false);
   showMenuEmitter = new EventEmitter<boolean>();
 
