@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 
 export class Util {
 
@@ -13,5 +14,12 @@ export class Util {
             message = res.message;
         }
         return `${message}</ul>`;
+      }
+    
+      static getHeader() {
+        return new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic dG9td2VsbEFwcDowNm9HZyNLRmFCcjE0VE43QGVaTEJ5U3N0JEt1VUR4bQ=='
+        });
       }
 }

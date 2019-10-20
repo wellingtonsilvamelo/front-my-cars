@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit() {
-    if(localStorage.getItem("ACCESS_TOKEN")){
-      this.router.navigate(['/home'])
+    if(this.authService.isAuthenticated()){
+      this.router.navigate(['/users'])
     }
 
     this.formulario = this.formBuilder.group({
@@ -45,8 +45,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
 
-    this.authService.signOut();
-
     if (this.formulario.valid){
       this.user = new User();
       this.user.login = this.formulario.get('username').value;
@@ -60,7 +58,19 @@ export class LoginComponent implements OnInit {
         });
         this.isLoadingResults = false;
       }); 
+    }else{
+      this.verificarValidacaoForm(this.formulario);
     }
+  }
+
+  verificarValidacaoForm(form: FormGroup){
+    Object.keys(form.controls).forEach(element => {
+      const control = form.get(element);
+      control.markAsTouched();
+      if(control instanceof FormGroup){
+        this.verificarValidacaoForm(control);
+      }
+    });
   }
 
 }

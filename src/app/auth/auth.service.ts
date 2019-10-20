@@ -6,14 +6,15 @@ import { User } from '../model/user';
 import { JwtResponse } from '../model/jwt-response';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Util } from '../util/util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  AUTH_SERVER: string = "https://app-my-cars.herokuapp.com";
-  //AUTH_SERVER: string = "http://localhost:8085";
+  //AUTH_SERVER: string = "https://app-my-cars.herokuapp.com";
+  AUTH_SERVER: string = "http://localhost:8085";
   authSubject = new BehaviorSubject(false);
   showMenuEmitter = new EventEmitter<boolean>();
 
@@ -39,7 +40,7 @@ export class AuthService {
       .set('grant_type', 'password');
 
     return this.http.post(`${this.AUTH_SERVER}/oauth/token`, data,
-      { headers: this.getHeader() }).pipe(
+      { headers: Util.getHeader() }).pipe(
         tap(async (res: JwtResponse) => {
           if (res.access_token) {
             localStorage.clear();
@@ -95,22 +96,8 @@ export class AuthService {
           res ? resolve(true) : reject(false);
         });
       }else{
-        reject(false);
+        reject();
       }
-    });
-  }
-
-  getHeader() {
-    return new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic dG9td2VsbEFwcDowNm9HZyNLRmFCcjE0VE43QGVaTEJ5U3N0JEt1VUR4bQ=='
-    });
-  }
-
-  getAuthoriHeader() {
-    return new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic dG9td2VsbEFwcDowNm9HZyNLRmFCcjE0VE43QGVaTEJ5U3N0JEt1VUR4bQ=='
     });
   }
 

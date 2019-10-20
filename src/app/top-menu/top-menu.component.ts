@@ -14,9 +14,9 @@ export class TopMenuComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    // if(this.authService.isAuthenticated()){
-    //   this.isLogged = true;
-    // }
+    if(localStorage.getItem("ACCESS_TOKEN")){
+      this.isLogged = true;
+    }
   }
 
   signOut(){
