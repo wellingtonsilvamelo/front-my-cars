@@ -51,7 +51,8 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserListComponent,
-    data: { title: 'Users' }
+    data: { title: 'Users' },
+    canActivate: [RouteGuard]
   },
   {
     path: 'user/register',
@@ -61,15 +62,17 @@ const routes: Routes = [
   {
     path: 'user/edit/:id',
     component: UserEditComponent,
-    data: { title: 'Edit' }
+    data: { title: 'Edit' },
+    canActivate: [RouteGuard]
   },
   {
     path: 'user/detail/:id',
     component: UserDetailComponent,
-    data: { title: 'Detail' }
+    data: { title: 'Detail' },
+    canActivate: [RouteGuard]
   },
   { path: '',
-    redirectTo: '/users',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];

@@ -107,6 +107,7 @@ export class RegisterComponent implements OnInit {
         this.toastr.success("User saved successfully");
         this.formulario.reset();
         this.isLoadingResults = false;
+        this.router.navigateByUrl('/');
       }, err => {
         this.toastr.error(Util.getErrorMessage(err), null, {
           enableHtml: true
